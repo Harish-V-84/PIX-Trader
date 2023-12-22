@@ -1,6 +1,10 @@
 package com.trader.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trader.po_manager.PageObjectManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,6 +25,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 public class TraderUtils {
 
     public static WebDriver driver;
+    public static PageObjectManager po_manager;
 
     // return the class name as a string
     public String exceptionClassNameAndMessage(Exception exceptionObj) {
@@ -55,7 +60,7 @@ public class TraderUtils {
 
             driver.get(url);
 
-//            pageObjectManager = new PageObjectManager(driver);
+            po_manager = new PageObjectManager(driver);
 
         }catch(Exception exception) {
 
@@ -153,11 +158,18 @@ public class TraderUtils {
 
     public void createNewFolder(){
 
-        File newDirectory = new File(System.getProperty("user.dir") + File.separator + filePaths().get("Screenshots"));
+        try {
 
-        if(!newDirectory.exists()){
+            File newDirectory = new File(System.getProperty("user.dir") + File.separator + filePaths().get("Screenshots"));
 
-        newDirectory.mkdir();
+            if (!newDirectory.exists()) {
+
+                newDirectory.mkdir();
+
+            }
+        }catch (Exception exception){
+
+            System.out.println(exceptionClassNameAndMessage(exception));
         }
 
     }
@@ -168,12 +180,46 @@ public class TraderUtils {
 
             File directory = new File(System.getProperty("user.dir") + File.separator + filePaths().get("Screenshots"));
 
-            if (!directory.exists()) {
+            if (directory.exists()) {
                 directory.delete();
             }
         }catch (Exception exception){
 
             System.out.println(exceptionClassNameAndMessage(exception));
+        }
+    }
+
+    public String getUrl(){
+
+        return driver.getCurrentUrl();
+    }
+
+    public static void browserClose(){
+
+        driver.close();
+    }
+
+    public String getElementText(WebElement element){
+
+        return element.getText();
+    }
+
+    public void takeSnapShot(WebDriver webdriver,String fileWithPath) {
+
+        try {
+
+            TakesScreenshot scrShot =((TakesScreenshot)webdriver);
+
+            File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+
+            File DestFile=new File(System.getProperty("user.dir")+fileWithPath);
+
+            FileUtils.copyFile(SrcFile, DestFile);
+
+        } catch (Exception exception) {
+
+            System.out.println("Problem on Taking snap shot" + exceptionClassNameAndMessage(exception));
+
         }
     }
 
