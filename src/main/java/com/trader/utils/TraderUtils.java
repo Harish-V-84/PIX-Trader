@@ -1,5 +1,6 @@
 package com.trader.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,6 +10,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -107,6 +110,71 @@ public class TraderUtils {
     public void sleep(long time){
 
         try{ Thread.sleep(time); }catch (Exception exception){ exceptionClassNameAndMessage(exception); }
+    }
+
+    static ObjectMapper mapper = new ObjectMapper();
+    @SuppressWarnings(value = "unchecked")
+    public Map<Object, Object> jsonReader(String filePath) {
+
+        Map<Object, Object> json = null;
+        
+        try{
+
+            json = mapper.readValue(Paths.get(System.getProperty("user.dir")+filePath).toFile(), Map.class);
+            
+
+        }catch (Exception ex) {
+
+            System.out.println("problem on jsonRead method");
+        }
+
+        return json;
+    }
+
+    public void jsonPayloadWriter(Object object, String filePath) {
+
+        try {
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(System.getProperty("user.dir") + filePath), object);
+        }catch (Exception ex){
+
+            System.out.println("problem on jsonPayloadWriter method");
+        }
+    }
+
+    public Map<String, String> filePaths(){
+
+        Map<String, String> files = new HashMap<>();
+
+        files.put("Login", "/applicationData/Login.json");
+        files.put("Screenshots", "/screenshots");
+
+        return files;
+    }
+
+    public void createNewFolder(){
+
+        File newDirectory = new File(System.getProperty("user.dir") + File.separator + filePaths().get("Screenshots"));
+
+        if(!newDirectory.exists()){
+
+        newDirectory.mkdir();
+        }
+
+    }
+
+    public void deleteFolder(){
+
+        try {
+
+            File directory = new File(System.getProperty("user.dir") + File.separator + filePaths().get("Screenshots"));
+
+            if (!directory.exists()) {
+                directory.delete();
+            }
+        }catch (Exception exception){
+
+            System.out.println(exceptionClassNameAndMessage(exception));
+        }
     }
 
 }
