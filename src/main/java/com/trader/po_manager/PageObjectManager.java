@@ -1,11 +1,15 @@
 package com.trader.po_manager;
 
 import com.trader.po_models.LoginPage;
+import com.trader.po_models.RegisterPage;
 import org.openqa.selenium.WebDriver;
 
 public class PageObjectManager {
 
-    public static LoginPage login;
+    private LoginPage login;
+
+    private RegisterPage registerPage;
+
     public WebDriver driver;
 
     public PageObjectManager(WebDriver driver2) {
@@ -16,6 +20,11 @@ public class PageObjectManager {
     public LoginPage getLogin(){
 
         return login == null ? new LoginPage(driver) : login;
+    }
+
+    public RegisterPage getRegisterPage(){
+
+        return registerPage == null ? new RegisterPage(driver) : registerPage;
     }
 
 }

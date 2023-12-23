@@ -1,4 +1,4 @@
-package com.steps.login;
+package com.steps;
 
 import com.trader.utils.TraderUtils;
 import io.cucumber.java.*;
@@ -7,8 +7,14 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class Hooks {
 
+    static TraderUtils base = new TraderUtils();
+
     @BeforeAll
     public static void launchBrowser(){
+
+        base.deleteFolder();
+
+        base.createNewFolder();
 
         TraderUtils.launchBrowser("chrome", "https://pix-trader.pibase.info/login", "");
     }
@@ -34,7 +40,7 @@ public class Hooks {
             System.out.println("scenario status :"+status);
         }
 
-        new TraderUtils().takeSnapShot(TraderUtils.driver, "\\Screenshot\\img"+imageCount+".png");
+        base.takeSnapShot(TraderUtils.driver, base.filePaths().get("Screenshots")+"/img"+imageCount+".png");
         imageCount++;
 
     }
@@ -42,6 +48,6 @@ public class Hooks {
     @AfterAll
     public static void afterAll(){
 
-        TraderUtils.browserClose();
+        base.browserClose();
     }
 }

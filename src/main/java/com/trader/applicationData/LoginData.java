@@ -5,7 +5,7 @@ import com.trader.utils.TraderUtils;
 import java.util.Map;
 
 public class LoginData  {
-    private static TraderUtils base = new TraderUtils();
+    private static final TraderUtils base = new TraderUtils();
     public String emailID;
     public String password;
 

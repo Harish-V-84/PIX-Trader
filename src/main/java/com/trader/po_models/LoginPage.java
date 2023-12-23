@@ -30,4 +30,10 @@ public class LoginPage {
     @FindBy(xpath = "//h3[@class = 'mr-2 text-xl']")
     private WebElement dashboardName;
 
+    @FindBy(xpath = "//input[@type = 'checkbox']")
+    private WebElement checkBox;
+
+    @FindBy(xpath = "//span[text() = 'Accept']")
+    private WebElement acceptBtn;
+
 }
