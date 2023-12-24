@@ -106,27 +106,30 @@ public class TraderUtils {
         return wait == null ? new WebDriverWait(driver, Duration.ofSeconds(20)) : wait;
     }
 
+    // send keys to element
+    // para: element - WebElement, text - 'value'
     public void sendKeys(WebElement element, String text) {
 
-        waitObj().until(elementToBeClickable(element)).sendKeys(text);
+        try { waitObj().until(elementToBeClickable(element)).sendKeys(text);}
+        catch (Exception exception) { exceptionClassNameAndMessage(exception); }
     }
 
+    // click the element
     public void clickElement(WebElement element) {
 
-        waitObj().until(elementToBeClickable(element)).click();
+        try { waitObj().until(elementToBeClickable(element)).click(); }
+        catch (Exception exception) { exceptionClassNameAndMessage(exception); }
     }
 
     public void sleep(long time) {
 
-        try {
-            Thread.sleep(time);
-        } catch (Exception exception) {
-            exceptionClassNameAndMessage(exception);
-        }
+        try { Thread.sleep(time); } catch (Exception exception) { exceptionClassNameAndMessage(exception); }
     }
 
     static ObjectMapper mapper = new ObjectMapper();
 
+    // Json file reader and return as Map
+    // para: filePath - json file path
     @SuppressWarnings(value = "unchecked")
     public Map<Object, Object> jsonReader(String filePath) {
 
@@ -145,6 +148,8 @@ public class TraderUtils {
         return json;
     }
 
+    // Json file writer
+    //para: Object - Map, filePath - json File path
     public void jsonPayloadWriter(Object object, String filePath) {
 
         try {
@@ -155,16 +160,19 @@ public class TraderUtils {
         }
     }
 
+    // over here we have all the file paths in this method, which return as map
     public Map<String, String> filePaths() {
 
         Map<String, String> files = new HashMap<>();
 
-        files.put("Login", "/applicationData/Login.json");
         files.put("Screenshots", "/screenshots");
+        files.put("Login", "/applicationData/Login.json");
+        files.put("Register", "/Register.json");
 
         return files;
     }
 
+    // this method will create new Screenshot folder in our project
     public void createNewFolder() {
 
         try {
@@ -183,6 +191,7 @@ public class TraderUtils {
 
     }
 
+    // this method will delete the Screenshot folder
     public void deleteFolder() {
 
         try {
@@ -198,21 +207,26 @@ public class TraderUtils {
         }
     }
 
+    // get the current URL and return as String
     public String getUrl() {
 
         return driver.getCurrentUrl();
     }
 
+    // this method will close the current web page or current tab
     public void browserClose() {
 
-        driver.close();
+        try { driver.close();} catch (Exception e) { throw new RuntimeException(e); }
     }
 
+    // this will return string, from any tag which have text
     public String getElementText(WebElement element) {
 
         return element.getText();
     }
 
+    // this method will take screenshot and stores in screenshot folder
+    // para: webdriver - driver, fileWithPath - folder path
     public void takeSnapShot(WebDriver webdriver, String fileWithPath) {
 
         try {
@@ -232,16 +246,19 @@ public class TraderUtils {
         }
     }
 
+    // return date format in string
     public String date(){
 
         return new SimpleDateFormat("dd MMMM yyyy").format(new Date());
     }
 
+    //  return date in string format [eg: 29 | 30]
     public String day(){
 
         return date().substring(0, 2);
     }
 
+    // return month is string format [eg: may | april | march]
     public String month(){
 
         return date().substring(3, date().length()-5);

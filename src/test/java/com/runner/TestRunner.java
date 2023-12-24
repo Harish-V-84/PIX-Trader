@@ -8,6 +8,12 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "Features",
         glue = "com.steps",
+        plugin = {
+
+                "json:target/reports/WebAutomationJsonReports.json",
+
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+        },
         dryRun = false, monochrome = true,
         tags = "@loginWithValidCredentials"
 

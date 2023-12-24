@@ -33,9 +33,9 @@ public class LoginWithValidCredentials extends TraderUtils {
 
         clickElement(po_manager.getLogin().getLoginBtn());
 
-        clickElement(po_manager.getLogin().getCheckBox());
-
-        clickElement(po_manager.getLogin().getAcceptBtn());
+//        clickElement(po_manager.getLogin().getCheckBox());
+//
+//        clickElement(po_manager.getLogin().getAcceptBtn());
     }
 
     @Then("validate the user name from the Trader dashboard")

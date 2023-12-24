@@ -17,6 +17,7 @@ public class LoginData  {
         Map<String, String> valid = (Map<String, String>) login.get(key);
 
         emailID = valid.get("emailId");
+
         password = valid.get("password");
     }
 
