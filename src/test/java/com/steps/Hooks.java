@@ -45,7 +45,7 @@ public class Hooks {
 
     }
 
-    @AfterAll
+//    @AfterAll
     public static void afterAll(){
 
         base.browserClose();

@@ -36,4 +36,12 @@ public class RegisterPage {
     @FindBy(xpath = "//span[text() = 'Create account']//parent::div")
     private WebElement createAccountBtn;
 
+    @FindBy(xpath = "//div[text() = 'Get Code']")
+    private WebElement getCode;
+
+    @FindBy(name = "email_otp")
+    private WebElement otpField;
+
+    @FindBy(xpath = "//span[text() = 'Submit']//parent::div")
+    private WebElement submitBtn;
 }

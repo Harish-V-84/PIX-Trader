@@ -36,4 +36,7 @@ public class LoginPage {
     @FindBy(xpath = "//span[text() = 'Accept']")
     private WebElement acceptBtn;
 
+    @FindBy(xpath = "//a[text() = 'Register Now']")
+    private WebElement registerNow;
+
 }

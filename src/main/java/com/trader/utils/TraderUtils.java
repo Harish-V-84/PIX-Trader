@@ -167,7 +167,7 @@ public class TraderUtils {
 
         files.put("Screenshots", "/screenshots");
         files.put("Login", "/applicationData/Login.json");
-        files.put("Register", "/Register.json");
+        files.put("Register", "/applicationData/Register.json");
 
         return files;
     }
@@ -222,16 +222,16 @@ public class TraderUtils {
     // this will return string, from any tag which have text
     public String getElementText(WebElement element) {
 
-        return element.getText();
+        return waitObj().until(elementToBeClickable(element)).getText();
     }
 
     // this method will take screenshot and stores in screenshot folder
-    // para: webdriver - driver, fileWithPath - folder path
-    public void takeSnapShot(WebDriver webdriver, String fileWithPath) {
+    // para: webDriver - driver, fileWithPath - folder path
+    public void takeSnapShot(WebDriver webDriver, String fileWithPath) {
 
         try {
 
-            TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
+            TakesScreenshot scrShot = ((TakesScreenshot) webDriver);
 
             File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
 
@@ -263,5 +263,23 @@ public class TraderUtils {
 
         return date().substring(3, date().length()-5);
     }
+
+    public String dateInWords(){
+
+        Map<String, String> date = new HashMap<>();
+
+        date.put("1", "One"); date.put("2", "Two"); date.put("3", "Three"); date.put("4", "Four");
+        date.put("5", "Five"); date.put("6", "Six"); date.put("7", "Seven"); date.put("8", "Eight");
+        date.put("9", "Nine"); date.put("10", "Ten"); date.put("11", "Eleven"); date.put("12", "Twelve");
+        date.put("13", "Thirteen"); date.put("14", "Fourteen"); date.put("15", "Fifteen"); date.put("16", "Sixteen");
+        date.put("17", "Seventeen"); date.put("18", "Eighteen"); date.put("19", "Nineteen"); date.put("20", "Twenty");
+        date.put("21", "Twenty One"); date.put("22", "Twenty Two"); date.put("23", "Twenty Three"); date.put("24", "Twenty Four");
+        date.put("25", "Twenty Five"); date.put("26", "Twenty Six"); date.put("27", "Twenty Seven"); date.put("28", "Twenty Eight");
+        date.put("29", "Twenty Nine"); date.put("30", "Thirty"); date.put("31", "Thirty One");
+
+        return date.get(day());
+    }
+
+
 
 }

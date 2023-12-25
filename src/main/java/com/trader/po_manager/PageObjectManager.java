@@ -1,16 +1,16 @@
 package com.trader.po_manager;
 
+import com.trader.po_models.KYC_VerificationPage;
 import com.trader.po_models.LoginPage;
 import com.trader.po_models.RegisterPage;
 import org.openqa.selenium.WebDriver;
 
 public class PageObjectManager {
+    public WebDriver driver;
 
     private LoginPage login;
-
     private RegisterPage registerPage;
-
-    public WebDriver driver;
+    private KYC_VerificationPage kycVerificationPage;
 
     public PageObjectManager(WebDriver driver2) {
 
@@ -25,6 +25,12 @@ public class PageObjectManager {
     public RegisterPage getRegisterPage(){
 
         return registerPage == null ? new RegisterPage(driver) : registerPage;
+    }
+
+    public KYC_VerificationPage getKycVerification(){
+
+        return kycVerificationPage == null ? new KYC_VerificationPage(driver) : kycVerificationPage;
+
     }
 
 }

@@ -13,17 +13,64 @@ public class RegisterData {
     public String emailID;
     public String password;
 
+    public String url;
+
     @SuppressWarnings(value = "unchecked")
     public RegisterData(String key){
 
+        int count;
+        String email;
+
         Map<Object, Object> register = base.jsonReader(base.filePaths().get("Register"));
 
-        Map<String, String> valid = (Map<String, String>) register.get(key);
+        Map<String, String> data = (Map<String, String>) register.get(key);
 
-//        firstName =
+        if (!data.get("lastName").equals(base.dateInWords())){
 
-        emailID = valid.get("emailId");
+            data.put("lastName", base.dateInWords());
 
-        password = valid.get("password");
+            if (!data.get("firstName").equals(base.month())){
+
+                data.put("firstName", base.month());
+            }
+
+            data.put("count", "0");
+
+            count = Integer.parseInt(data.get("count"));
+
+            email = "harish." + base.month().toLowerCase() + base.day() + "+" + count + "@pibase.info";
+
+            data.put("emailId", email);
+
+            count++;
+
+            data.put("count", String.valueOf(count));
+
+            base.jsonPayloadWriter(register, base.filePaths().get("Register"));
+
+        }else {
+
+            count = Integer.parseInt(data.get("count"));
+
+            email = "harish." + base.month().toLowerCase() + base.day() + "+" + count + "@pibase.info";
+
+            count++;
+
+            data.put("emailId", email);
+
+            data.put("count", String.valueOf(count));
+
+            base.jsonPayloadWriter(register, base.filePaths().get("Register"));
+        }
+
+        url = register.get("url").toString();
+
+        firstName = data.get("firstName");
+
+        lastName = data.get("lastName");
+
+        emailID = data.get("emailId");
+
+        password = data.get("password");
     }
 }
