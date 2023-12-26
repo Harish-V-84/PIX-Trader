@@ -72,5 +72,14 @@ public class RegisterData {
         emailID = data.get("emailId");
 
         password = data.get("password");
+
+        Map<Object, Object> login = base.jsonReader(base.filePaths().get("Login"));
+
+        Map<String, String> valid = (Map<String, String>) login.get(key);
+
+        valid.put("emailId", emailID);
+
+        base.jsonPayloadWriter(login, base.filePaths().get("Login"));
+
     }
 }

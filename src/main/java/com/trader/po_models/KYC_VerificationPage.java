@@ -21,5 +21,40 @@ public class KYC_VerificationPage {
     @FindBy(xpath = "//h1[text() = 'KYC Verification']")
     private WebElement kycText;
 
+    /* ===== Mobile Verification ===== */
+
+    @FindBy(xpath = "//input[@placeholder='Phone number']")
+    private WebElement EnterMobileNum;
+
+    @FindBy(xpath = "//input[@name='new_phone_otp']//parent::div//child::a//child::div[text() = 'Get Code']")
+    private WebElement clickMobileCode;
+
+    @FindBy(xpath = "//input[@name='new_phone_otp']")
+    private WebElement mobileOTPInputField;
+
+    @FindBy(xpath = "//input[@name='email_otp']//parent::div//child::a//child::div[text() = 'Get Code']")
+    private WebElement clickEmailCode;
+
+    @FindBy(xpath = "//input[@name='email_otp']")
+    private WebElement emailOTPInputField;
+
+    @FindBy(xpath = "//span[text() ='Verify Mobile']")
+    private WebElement verifyMobileBtn;
+
+    /* ===== Personal Information ===== */
+
+    @FindBy(xpath = "//select[@name ='gender']")
+    private WebElement selectGender;
+
+    @FindBy(xpath = "//input[@name ='dob']")
+    private WebElement DateOfBrithInputField;
+
+    @FindBy(xpath = "//select[@name ='occupation']")
+    private WebElement selectOccupation;
+
+    @FindBy(xpath = "//select[@name ='annual_income']")
+    private WebElement selectAnnualIncome;
+
+
 
 }

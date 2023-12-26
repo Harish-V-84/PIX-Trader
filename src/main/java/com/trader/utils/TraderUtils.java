@@ -181,7 +181,7 @@ public class TraderUtils {
 
             if (!newDirectory.exists()) {
 
-                newDirectory.mkdir();
+                boolean mkdir = newDirectory.mkdir();
 
             }
         } catch (Exception exception) {
@@ -199,7 +199,8 @@ public class TraderUtils {
             File directory = new File(System.getProperty("user.dir") + File.separator + filePaths().get("Screenshots"));
 
             if (directory.exists()) {
-                directory.delete();
+
+                boolean delete = directory.delete();
             }
         } catch (Exception exception) {
 
