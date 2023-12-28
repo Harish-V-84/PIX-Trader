@@ -43,6 +43,9 @@ public class KYC_VerificationPage {
 
     /* ===== Personal Information ===== */
 
+    @FindBy(xpath = "//h3[text() = 'Personal Information']")
+    private WebElement personalInformationText;
+
     @FindBy(xpath = "//select[@name ='gender']")
     private WebElement selectGender;
 
@@ -55,6 +58,99 @@ public class KYC_VerificationPage {
     @FindBy(xpath = "//select[@name ='annual_income']")
     private WebElement selectAnnualIncome;
 
+    @FindBy(xpath = "//input[@name = 'account_purpose']")
+    private WebElement purposeOfAccountFiled;
 
+    @FindBy(xpath = "//input[@name = 'permanent_address_state']")
+    private WebElement permanentAddressState;
+
+    @FindBy(xpath = "//input[@name = 'permanent_address_city']")
+    private WebElement permanentAddressCity;
+
+    @FindBy(xpath = "//input[@name = 'permanent_address_street']")
+    private WebElement permanentAddressStreet;
+
+    @FindBy(xpath = "//input[@name = 'permanent_address_door_number']")
+    private WebElement permanentAddressDoorNum;
+
+    @FindBy(xpath = "//input[@name = 'is_current_address_same']")
+    private WebElement currentAddressCheckbox;
+
+    @FindBy(name = "current_address_state")
+    private WebElement currentAddressState;
+
+    @FindBy(name = "current_address_city")
+    private WebElement currentAddressCity;
+
+    @FindBy(name = "current_address_street")
+    private WebElement currentAddressStreet;
+
+    @FindBy(name = "current_address_door_number")
+    private WebElement currentAddressDoorNum;
+
+    @FindBy(xpath = "//span[text() = 'Submit']//parent::div")
+    private WebElement submitBtn;
+
+    /* ===== suitability Assessment ===== */
+
+    @FindBy(xpath = "//h3[text() = 'Suitability Assessment']")
+    private WebElement suitabilityAssessmentText;
+
+    @FindBy(name = "assessment_1")
+    private WebElement assessment1;
+
+    @FindBy(name = "assessment_2")
+    private WebElement assessment2;
+
+    @FindBy(name = "education_level")
+    private WebElement educationLevel;
+
+    /* ===== Bank Details ===== */
+
+    @FindBy(xpath = "//h3[text() = 'Bank Details']")
+    private WebElement bankDetailsText;
+
+    @FindBy(name = "bank_name")
+    private WebElement bankName;
+
+    @FindBy(name = "branch_name")
+    private WebElement branchName;
+
+    @FindBy(name = "account_number")
+    private WebElement accountNumber;
+
+    @FindBy(name = "swift")
+    private WebElement swift;
+
+    @FindBy(name = "iban")
+    private WebElement iban;
+
+    @FindBy(name = "bank_address")
+    private WebElement bankAddress;
+
+    @FindBy(name = "account_type")
+    private WebElement selectAccountType;
+
+    /** ===== Documents ===== **/
+
+    @FindBy(xpath = "//h3[text() = 'Documents']")
+    private WebElement documentText;
+
+    @FindBy(xpath = "//span[text() = 'PASSPORT']//parent::label//child::input")
+    private WebElement passportRadioBtn;
+
+    @FindBy(name = "PASSPORTdocument_id")
+    private  WebElement documentID;
+
+    @FindBy(xpath = "//span[contains(text(), 'Upload the ')]")
+    private WebElement uploadDocumentFile;
+
+    /** ===== selfie ===== **/
+
+    @FindBy(xpath = "//span[contains(text(), 'Upload ')]")
+    private WebElement uploadSelfie;
+
+    @FindBy(xpath = "//input[@type = 'checkbox']")
+    private WebElement privacyPolicyCheckbox;
 
 }

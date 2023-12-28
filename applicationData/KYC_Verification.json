@@ -1,14 +1,38 @@
 {
-  "validCredentials": {
-    "mobileNumber": "",
-    "personalInformation": {
-
+  "validCredentials" : {
+    "mobileNumber" : "9840414838",
+    "personalInformation" : {
+      "gender" : "male",
+      "dob" : "12122001",
+      "occupation" : "Private Sector Service",
+      "annualIncome" : "5000-25000",
+      "purposeOfAccount" : "Trade",
+      "permanentAddress" : {
+        "state" : "TamilNadu",
+        "city" : "Chennai",
+        "street" : "NA",
+        "doorNo" : "16"
+      },
+      "currentAddress" : {
+        "state" : "TamilNadu",
+        "city" : "Chennai",
+        "street" : "NA",
+        "doorNo" : "16"
+      }
     },
-    "suitabilityAssessment": {
-
+    "suitabilityAssessment" : {
+      "assessment1" : "NA",
+      "assessment2" : "NA",
+      "educationLevel" : "NA"
     },
-    "bankDetails":{
-
+    "bankDetails" : {
+      "bankName" : "NA",
+      "branchName" : "NA",
+      "accountNumber" : "NA",
+      "swift" : "NA",
+      "iban" : "NA",
+      "bankAddress" : "NA",
+      "accountType" : "current"
     }
   }
 }

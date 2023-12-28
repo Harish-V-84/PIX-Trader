@@ -8,10 +8,10 @@ public class RegisterData {
 
     private static final TraderUtils base = new TraderUtils();
 
-    public String firstName;
-    public String lastName;
-    public String emailID;
-    public String password;
+    public static String firstName;
+    public static String lastName;
+    public static String emailID;
+    public static String password;
 
     public String url;
 
