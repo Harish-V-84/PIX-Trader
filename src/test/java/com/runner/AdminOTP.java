@@ -65,29 +65,23 @@ public class AdminOTP {
 
             clickElement(emailMore);
 
-            WebElement emailView = driver.findElement(By.xpath("//div[text() = 'View']"));
+            WebElement view = driver.findElement(By.xpath("//div[text() = 'View']"));
 
-            clickElement(emailView);
+            clickElement(view);
 
-            WebElement emailOtp = driver.findElement(By.xpath("//div[text() = 'Notification Payload']//parent::div//child::p"));
+            WebElement otp = driver.findElement(By.xpath("//div[text() = 'Notification Payload']//parent::div//child::p"));
 
-            emailOTP = getText(emailOtp);
+            emailOTP = getText(otp);
 
             driver.navigate().back();
-
-            baseClass.sleep(500);
 
             WebElement mobileMore = driver.findElement(By.xpath("//table//child::tbody//following-sibling::td[text() = '+91" + mobileNum + "']//parent::tr//child::td//child::div//child::button"));
 
             clickElement(mobileMore);
 
-            WebElement mobileView = driver.findElement(By.xpath("//div[text() = 'View']"));
+            clickElement(view);
 
-            clickElement(mobileView);
-
-            WebElement mobileOtp = driver.findElement(By.xpath("//div[text() = 'Notification Payload']//parent::div//child::p"));
-
-            mobileOTP = getText(mobileOtp);
+            mobileOTP = getText(otp);
 
         }else {
 

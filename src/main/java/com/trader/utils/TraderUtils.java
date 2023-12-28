@@ -12,13 +12,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -173,8 +168,6 @@ public class TraderUtils {
         files.put("Screenshots", "/screenshots");
         files.put("Login", "/applicationData/Login.json");
         files.put("Register", "/applicationData/Register.json");
-        files.put("KycVerification", "/applicationData/KYC_Verification.json");
-        files.put("image", "/documents/document.jpg");
 
         return files;
     }
@@ -286,43 +279,6 @@ public class TraderUtils {
         date.put("29", "Twenty Nine"); date.put("30", "Thirty"); date.put("31", "Thirty One");
 
         return date.get(day());
-    }
-
-    public void selectByValue(WebElement element, String value){
-
-        new Select(element).selectByValue(value);
-    }
-
-    public void uploadImage(String path){
-
-        try {
-            Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
-
-            StringSelection selection = new StringSelection(System.getProperty("user.dir")+path);
-
-            clip.setContents(selection, null);
-
-            sleep(1500);
-
-            Robot robot = new Robot();
-
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-
-            sleep(500);
-
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-            robot.keyRelease(KeyEvent.VK_V);
-
-            sleep(500);
-
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-
-        } catch (AWTException e) {
-
-            throw new RuntimeException(e);
-        }
     }
 
 
