@@ -39,6 +39,9 @@ public class RegisterPage {
     @FindBy(xpath = "//div[text() = 'Get Code']")
     private WebElement getCode;
 
+    @FindBy(xpath = "//div[text() = 'OTP sent successfully']")
+    private WebElement otpSentMessage;
+
     @FindBy(name = "email_otp")
     private WebElement otpField;
 

@@ -1,5 +1,6 @@
 package com.runner;
 
+
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
@@ -14,10 +15,10 @@ import org.junit.runner.RunWith;
 
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         },
-        dryRun = false, monochrome = true,
-        tags = "@registerValidCredentials"
-
+        dryRun = true, monochrome = true,
+        tags = "@registerValidCredentials or @KYC_WithValidCredentials"
 )
+
 public class TestRunner {
 
 

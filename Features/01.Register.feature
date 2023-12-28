@@ -11,6 +11,7 @@ Feature: Validating Register Functionality
     And user click on check box for terms and conditions
     And at last user click the Create Account button
     When user click on Get code for email OTP
+    Then toast message should display to the user "OTP sent successfully"
     And user should enter the email OTP
     And click on Submit button
     Then validate user navigate to KYC verification page

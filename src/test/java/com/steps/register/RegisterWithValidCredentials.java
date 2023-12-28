@@ -24,22 +24,22 @@ public class RegisterWithValidCredentials extends TraderUtils {
     @Then("user fills the form by entering the first name")
     public void user_fills_the_form_by_entering_the_first_name() {
 
-        sendKeys(po_manager.getRegisterPage().getFirstName(), userData.firstName);
+        sendKeys(po_manager.getRegisterPage().getFirstName(), RegisterData.firstName);
     }
     @Then("last name")
     public void last_name() {
 
-        sendKeys(po_manager.getRegisterPage().getLastName(), userData.lastName);
+        sendKeys(po_manager.getRegisterPage().getLastName(), RegisterData.lastName);
     }
     @Then("email ID")
     public void email_id() {
 
-        sendKeys(po_manager.getRegisterPage().getEmail(), userData.emailID);
+        sendKeys(po_manager.getRegisterPage().getEmail(), RegisterData.emailID);
     }
     @Then("password")
     public void password() {
 
-        sendKeys(po_manager.getRegisterPage().getPassword(), userData.password);
+        sendKeys(po_manager.getRegisterPage().getPassword(), RegisterData.password);
     }
     @Then("user click on check box for terms and conditions")
     public void user_click_on_check_box_for_terms_and_conditions() {
@@ -55,13 +55,18 @@ public class RegisterWithValidCredentials extends TraderUtils {
     public void user_click_on_get_code_for_email_otp() {
 
         clickElement(po_manager.getRegisterPage().getGetCode());
-
-        sleep(3000);
     }
+
+    @Then("toast message should display to the user {string}")
+    public void toast_message_should_display_to_the_user(String message) {
+
+        textShouldBePresent(po_manager.getRegisterPage().getGetCode(), message);
+    }
+
     @When("user should enter the email OTP")
     public void user_should_enter_the_email_otp() {
 
-        AdminOTP.getOTP(userData.emailID, "");
+        AdminOTP.getOTP(RegisterData.emailID, "");
 
         sendKeys(po_manager.getRegisterPage().getOtpField(), AdminOTP.emailOTP);
     }
