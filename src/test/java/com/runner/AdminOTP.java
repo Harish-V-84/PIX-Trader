@@ -27,85 +27,92 @@ public class AdminOTP {
 
     private void getMailAndMobileOTP(String emailID, String mobileNum){
 
-        TraderUtils baseClass = new TraderUtils();
+        try {
+            TraderUtils baseClass = new TraderUtils();
 
-        ChromeOptions options = new ChromeOptions();
+            ChromeOptions options = new ChromeOptions();
 
-        options.addArguments("--headless=new");
+//            options.addArguments("--headless=new");
 
-        driver = new ChromeDriver(options);
+            driver = new ChromeDriver(options);
 
-        driver.manage().window().maximize();
+            driver.manage().window().maximize();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        driver.get("https://pix-admin.pibase.info/login");
+            driver.get("https://pix-admin.pibase.info/login");
 
-        WebElement email = driver.findElement(By.name("email"));
+            WebElement email = driver.findElement(By.name("email"));
 
-        sendKeys(email, "sunil@pibase.info");
+            sendKeys(email, "sunil@pibase.info");
 
-        WebElement password = driver.findElement(By.name("password"));
+            WebElement password = driver.findElement(By.name("password"));
 
-        sendKeys(password, "nullvoid@13");
+            sendKeys(password, "nullvoid@13");
 
-        baseClass.sleep(1000);
+            baseClass.sleep(1000);
 
-        WebElement submitBtn = driver.findElement(By.xpath("//span[text() = 'Sign in']"));
+            WebElement submitBtn = driver.findElement(By.xpath("//span[text() = 'Sign in']"));
 
-        clickElement(submitBtn);
+            clickElement(submitBtn);
 
-        clickElement(driver.findElement(By.xpath("//p[text() = 'Notifications']")));
+            clickElement(driver.findElement(By.xpath("//p[text() = 'Notifications']")));
 
 //        //table//child::tbody//following-sibling::td[text() = 'harish.venkat2018@gmail.com']//parent::tr//child::td//child::div//child::button
 
-        if (!emailID.isEmpty() && !mobileNum.isEmpty()) {
+            if (!emailID.isEmpty() && !mobileNum.isEmpty()) {
 
-            WebElement emailMore = driver.findElement(By.xpath("//table//child::tbody//following-sibling::td[text() = '" + emailID + "']//parent::tr//child::td//child::div//child::button"));
+                WebElement emailMore = driver.findElement(By.xpath("//table//child::tbody//following-sibling::td[text() = '" + emailID + "']//parent::tr//child::td//child::div//child::button"));
 
-            clickElement(emailMore);
+                clickElement(emailMore);
 
-            WebElement emailView = driver.findElement(By.xpath("//div[text() = 'View']"));
+                WebElement emailView = driver.findElement(By.xpath("//div[text() = 'View']"));
 
-            clickElement(emailView);
+                clickElement(emailView);
 
-            WebElement emailOtp = driver.findElement(By.xpath("//div[text() = 'Notification Payload']//parent::div//child::p"));
+                WebElement emailOtp = driver.findElement(By.xpath("//div[text() = 'Notification Payload']//parent::div//child::p"));
 
-            emailOTP = getText(emailOtp);
+                emailOTP = getText(emailOtp);
 
-            driver.navigate().back();
+                driver.navigate().back();
 
-            baseClass.sleep(500);
+                baseClass.sleep(500);
 
-            WebElement mobileMore = driver.findElement(By.xpath("//table//child::tbody//following-sibling::td[text() = '+91" + mobileNum + "']//parent::tr//child::td//child::div//child::button"));
+                WebElement mobileMore = driver.findElement(By.xpath("//table//child::tbody//following-sibling::td[text() = '+91" + mobileNum + "']//parent::tr//child::td//child::div//child::button"));
 
-            clickElement(mobileMore);
+                clickElement(mobileMore);
 
-            WebElement mobileView = driver.findElement(By.xpath("//div[text() = 'View']"));
+                WebElement mobileView = driver.findElement(By.xpath("//div[text() = 'View']"));
 
-            clickElement(mobileView);
+                clickElement(mobileView);
 
-            WebElement mobileOtp = driver.findElement(By.xpath("//div[text() = 'Notification Payload']//parent::div//child::p"));
+                WebElement mobileOtp = driver.findElement(By.xpath("//div[text() = 'Notification Payload']//parent::div//child::p"));
 
-            mobileOTP = getText(mobileOtp);
+                mobileOTP = getText(mobileOtp);
 
-        }else {
+            }else {
 
-            WebElement emailMore = driver.findElement(By.xpath("//table//child::tbody//following-sibling::td[text() = '" + emailID + "']//parent::tr//child::td//child::div//child::button"));
+                WebElement emailMore = driver.findElement(By.xpath("//table//child::tbody//following-sibling::td[text() = '" + emailID + "']//parent::tr//child::td//child::div//child::button"));
 
-            clickElement(emailMore);
+                clickElement(emailMore);
 
-            WebElement view = driver.findElement(By.xpath("//div[text() = 'View']"));
+                WebElement view = driver.findElement(By.xpath("//div[text() = 'View']"));
 
-            clickElement(view);
+                clickElement(view);
 
-            WebElement otp = driver.findElement(By.xpath("//div[text() = 'Notification Payload']//parent::div//child::p"));
+                WebElement otp = driver.findElement(By.xpath("//div[text() = 'Notification Payload']//parent::div//child::p"));
 
-            emailOTP = getText(otp);
-        }
+                emailOTP = getText(otp);
+            }
 
-        driver.close();
+            Thread.sleep(400);
+            driver.close();
 //        driver.quit();
+
+        } catch (Exception exception) {
+
+            System.out.println("problem in Admin class for get OTP "+ exception.getMessage());
+        }
     }
 
     static WebDriverWait wait;

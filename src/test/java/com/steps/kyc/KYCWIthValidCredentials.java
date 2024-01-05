@@ -23,15 +23,29 @@ public class KYCWIthValidCredentials extends TraderUtils {
 
         clickElement(po_manager.getKycVerification().getClickMobileCode());
     }
+
+    @Then("toast message for mobile OTP should display to the user {string}")
+    public void toastMessageForMobileOTPShouldDisplayToTheUser(String otpSent) {
+
+        textShouldBePresent(po_manager.getKycVerification().getOtpSentMessage(), otpSent);
+    }
+
     @Given("click the get code text for email OTP")
     public void click_the_get_code_text_for_email_otp() {
 
         clickElement(po_manager.getKycVerification().getClickEmailCode());
     }
+
+    @Then("toast message for email OTP should display to the user {string}")
+    public void toastMessageForEmailOTPShouldDisplayToTheUser(String otpSent) {
+
+        textShouldBePresent(po_manager.getKycVerification().getOtpSentMessage(), otpSent);
+    }
+
     @Given("user enter the email OTP in input field")
     public void user_enter_the_email_otp_in_input_field() {
 
-        sleep(5000);
+//        sleep(5000);
 
         AdminOTP.getOTP(RegisterData.emailID, valid.mobileNum);
 
@@ -48,10 +62,10 @@ public class KYCWIthValidCredentials extends TraderUtils {
 
         clickElement(po_manager.getKycVerification().getVerifyMobileBtn());
     }
-    @Then("validate the user navigated to personal information fields")
-    public void validate_the_user_navigated_to_personal_information_fields() {
+    @Then("validate the user navigated to {string} fields")
+    public void validate_the_user_navigated_to_fields(String personalInformation) {
 
-        Assert.assertEquals("Personal Information",getElementText(po_manager.getKycVerification().getPersonalInformationText()));
+        Assert.assertEquals(personalInformation, getElementText(po_manager.getKycVerification().getPersonalInformationText()));
     }
     @Then("user must select gender from the gender drop down")
     public void user_must_select_gender_from_the_gender_drop_down() {
@@ -110,10 +124,10 @@ public class KYCWIthValidCredentials extends TraderUtils {
 
         clickElement(po_manager.getKycVerification().getSubmitBtn());
     }
-    @Then("validate user navigated to suitability Assessment fields")
-    public void validate_user_navigated_to_suitability_assessment_fields() {
+    @Then("validate user navigated to {string} fields")
+    public void validate_user_navigated_to_fields(String suitabilityAssessment) {
 
-        Assert.assertEquals("Suitability Assessment", getElementText(po_manager.getKycVerification().getSuitabilityAssessmentText()));
+        Assert.assertEquals(suitabilityAssessment, getElementText(po_manager.getKycVerification().getSuitabilityAssessmentText()));
     }
     @Then("user must enter the assessment one in the input field")
     public void user_must_enter_the_assessment_one_in_the_input_field() {
@@ -180,10 +194,10 @@ public class KYCWIthValidCredentials extends TraderUtils {
 
         clickElement(po_manager.getKycVerification().getSubmitBtn());
     }
-    @Then("validate user navigated to Documents fields")
-    public void validate_user_navigated_to_documents_fields() {
+    @Then("validate user navigated to {string} field")
+    public void validate_user_navigated_to_field(String documents) {
 
-        Assert.assertEquals("Documents", getElementText(po_manager.getKycVerification().getDocumentText()));
+        Assert.assertEquals(documents, getElementText(po_manager.getKycVerification().getDocumentText()));
     }
     @Then("user click the passport radio button")
     public void user_click_the_passport_radio_button() {
@@ -211,10 +225,10 @@ public class KYCWIthValidCredentials extends TraderUtils {
 
         clickElement(po_manager.getKycVerification().getSubmitBtn());
     }
-    @Then("validate user navigated to Selfie fields")
-    public void validate_user_navigated_to_selfie_fields() {
+    @Then("Validate user navigated to {string} field")
+    public void validateUserNavigatedToField(String selfie) {
 
-        Assert.assertEquals("Selfie", getElementText(po_manager.getKycVerification().getSelfieText()));
+        Assert.assertEquals(selfie, getElementText(po_manager.getKycVerification().getSelfieText()));
     }
     @Then("click the upload file and select selfie image from your pc")
     public void click_the_upload_file_and_select_selfie_image_from_your_pc() {
@@ -237,5 +251,6 @@ public class KYCWIthValidCredentials extends TraderUtils {
 
         clickElement(po_manager.getKycVerification().getSubmitBtn());
     }
+
 
 }

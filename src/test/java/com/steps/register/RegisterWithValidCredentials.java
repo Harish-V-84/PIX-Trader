@@ -1,6 +1,7 @@
 package com.steps.register;
 
 import com.runner.AdminOTP;
+import com.runner.AdminOTP2;
 import com.trader.applicationData.RegisterData;
 import com.trader.utils.TraderUtils;
 import io.cucumber.java.en.Given;
@@ -66,9 +67,9 @@ public class RegisterWithValidCredentials extends TraderUtils {
     @When("user should enter the email OTP")
     public void user_should_enter_the_email_otp() {
 
-        AdminOTP.getOTP(RegisterData.emailID, "");
+        AdminOTP2.getMailAndMobileOTP(RegisterData.emailID, "");
 
-        sendKeys(po_manager.getRegisterPage().getOtpField(), AdminOTP.emailOTP);
+        sendKeys(po_manager.getRegisterPage().getOtpField(), AdminOTP2.emailOTP);
     }
     @When("click on Submit button")
     public void click_on_submit_button() {

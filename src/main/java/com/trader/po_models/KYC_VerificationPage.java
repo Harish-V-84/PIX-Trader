@@ -29,6 +29,9 @@ public class KYC_VerificationPage {
     @FindBy(xpath = "//input[@name='new_phone_otp']//parent::div//child::a//child::div[text() = 'Get Code']")
     private WebElement clickMobileCode;
 
+    @FindBy(xpath = "//div[text() = 'OTP sent successfully']")
+    private WebElement otpSentMessage;
+
     @FindBy(xpath = "//input[@name='new_phone_otp']")
     private WebElement mobileOTPInputField;
 

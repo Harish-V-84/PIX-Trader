@@ -1,5 +1,6 @@
 package com.trader.po_manager;
 
+import com.trader.po_models.AdminPage;
 import com.trader.po_models.KYC_VerificationPage;
 import com.trader.po_models.LoginPage;
 import com.trader.po_models.RegisterPage;
@@ -11,6 +12,7 @@ public class PageObjectManager {
     private LoginPage login;
     private RegisterPage registerPage;
     private KYC_VerificationPage kycVerificationPage;
+    private AdminPage adminPage;
 
     public PageObjectManager(WebDriver driver2) {
 
@@ -31,6 +33,12 @@ public class PageObjectManager {
 
         return kycVerificationPage == null ? new KYC_VerificationPage(driver) : kycVerificationPage;
 
+    }
+
+
+    public AdminPage getAdminPage(){
+
+        return adminPage == null ? new AdminPage(driver) : adminPage;
     }
 
 }

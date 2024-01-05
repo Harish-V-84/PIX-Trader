@@ -48,7 +48,7 @@ public class KYC_VerificationData {
 
             Map<Object, Object> valid = (Map<Object, Object>) kyc.get(key);
 
-            valid.put("mobileNumber", "98" + new Random().nextInt(100000000));
+            valid.put("mobileNumber", "98" + new Random().nextInt(10000000, 99999999));
 
             mobileNum = valid.get("mobileNumber").toString();
 

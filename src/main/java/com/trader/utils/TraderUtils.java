@@ -23,6 +23,7 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -174,7 +175,7 @@ public class TraderUtils {
 
         Map<String, String> files = new HashMap<>();
 
-        files.put("Screenshots", "/screenshots");
+        files.put("Screenshots", "\\screenshots");
         files.put("Login", "/applicationData/Login.json");
         files.put("Register", "/applicationData/Register.json");
         files.put("KycVerification", "/applicationData/KYC_Verification.json");
@@ -192,7 +193,7 @@ public class TraderUtils {
 
             if (!newDirectory.exists()) {
 
-                boolean mkdir = newDirectory.mkdir();
+                newDirectory.mkdir();
 
             }
         } catch (Exception exception) {
@@ -211,7 +212,18 @@ public class TraderUtils {
 
             if (directory.exists()) {
 
-                boolean delete = directory.delete();
+                if(directory.isDirectory()){
+
+                    File[] files = directory.listFiles();
+
+                    if (files != null){
+
+                        for (File file: files){
+
+                            file.delete();
+                        }
+                    }
+                }
             }
         } catch (Exception exception) {
 
@@ -220,21 +232,30 @@ public class TraderUtils {
     }
 
     // get the current URL and return as String
-    public String getUrl() {
-
-        return driver.getCurrentUrl();
-    }
+    public String getUrl() { return driver.getCurrentUrl(); }
 
     // this method will close the current web page or current tab
     public void browserClose() {
 
-        try { driver.close();} catch (Exception e) { throw new RuntimeException(e); }
+        try { driver.close(); }
+
+        catch (Exception exception) {
+
+            System.out.println("problem on driver closing "+exceptionClassNameAndMessage(exception));
+        }
     }
 
     // this will return string, from any tag which have text
     public String getElementText(WebElement element) {
 
-        return waitObj().until(elementToBeClickable(element)).getText();
+        try { return waitObj().until(elementToBeClickable(element)).getText();}
+
+        catch (Exception exception) {
+
+            System.out.println("Problem on getText form Element"+exceptionClassNameAndMessage(exception));
+        }
+
+        return null;
     }
 
     // this method will take screenshot and stores in screenshot folder
@@ -265,24 +286,18 @@ public class TraderUtils {
     }
 
     //  return date in string format [eg: 29 | 30]
-    public String day(){
-
-        return date().substring(0, 2);
-    }
+    public String day(){ return date().substring(0, 2); }
 
     // return month is string format [eg: may | april | march]
-    public String month(){
-
-        return date().substring(3, date().length()-5);
-    }
+    public String month(){ return date().substring(3, date().length()-5); }
 
     public String dateInWords(){
 
         Map<String, String> date = new HashMap<>();
 
-        date.put("1", "One"); date.put("2", "Two"); date.put("3", "Three"); date.put("4", "Four");
-        date.put("5", "Five"); date.put("6", "Six"); date.put("7", "Seven"); date.put("8", "Eight");
-        date.put("9", "Nine"); date.put("10", "Ten"); date.put("11", "Eleven"); date.put("12", "Twelve");
+        date.put("01", "One"); date.put("02", "Two"); date.put("03", "Three"); date.put("04", "Four");
+        date.put("05", "Five"); date.put("06", "Six"); date.put("07", "Seven"); date.put("08", "Eight");
+        date.put("09", "Nine"); date.put("10", "Ten"); date.put("11", "Eleven"); date.put("12", "Twelve");
         date.put("13", "Thirteen"); date.put("14", "Fourteen"); date.put("15", "Fifteen"); date.put("16", "Sixteen");
         date.put("17", "Seventeen"); date.put("18", "Eighteen"); date.put("19", "Nineteen"); date.put("20", "Twenty");
         date.put("21", "Twenty One"); date.put("22", "Twenty Two"); date.put("23", "Twenty Three"); date.put("24", "Twenty Four");
@@ -341,6 +356,28 @@ public class TraderUtils {
     }
 
 
+    public String getCurrentWindow(){
+
+        return driver.getWindowHandle();
+    }
+
+    public Set<String> getAllWindows(){ return driver.getWindowHandles();}
+
+    public void driverSwitchSecondWin(String win){
+
+        for(String wind : getAllWindows()) if (!wind.equals(win)) driver.switchTo().window(wind);
+    }
+
+    public void driverSwitch(String win){
+
+        driver.switchTo().window(win);
+    }
+
+    public void driverSwitchPreviousWind(String win){ driver.switchTo().window(win);}
+
+    public void newTab(String url){ javascriptExecutorObj().executeScript("window.open('"+url+"')"); }
+
+    public void navigateBack(){ driver.navigate().back(); }
 
 
 
