@@ -16,8 +16,8 @@ import org.junit.runner.RunWith;
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         },
         dryRun = false, monochrome = true,
-//        tags = "@registerValidCredentials or @KYC_WithValidCredentials"
-        tags = "@registerValidCredentials"
+        tags = "@registerValidCredentials or @KYC_WithValidCredentials"
+//        tags = "@registerValidCredentials"
 )
 
 public class TestRunner {

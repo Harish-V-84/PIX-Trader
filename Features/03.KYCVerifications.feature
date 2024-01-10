@@ -3,10 +3,10 @@ Feature: Validating KYC Verification Functionality
   @KYC_WithValidCredentials
   Scenario: KYC Verification with Valid Credentials
     Given user entering the phone number
-    And click the get code text for mobile OTP
-    Then toast message for mobile OTP should display to the user "OTP sent successfully"
     And click the get code text for email OTP
     Then toast message for email OTP should display to the user "OTP sent successfully"
+    And click the get code text for mobile OTP
+    Then toast message for mobile OTP should display to the user "OTP sent successfully"
     And user enter the email OTP in input field
     And enter the mobile OTP in input field
     And user must click the verify mobile button

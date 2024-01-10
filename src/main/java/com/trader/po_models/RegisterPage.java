@@ -3,8 +3,12 @@ package com.trader.po_models;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 @Getter
 public class RegisterPage {
@@ -32,6 +36,13 @@ public class RegisterPage {
 
     @FindBy(xpath = "//input[@type = 'checkbox']")
     private WebElement checkBox;
+
+    @FindAll(
+            @FindBy(xpath = "//input[@type = 'checkbox']")
+    )private List<WebElement> checkBoxes;
+
+    @FindBy(xpath = "//span[text() = 'Accept']")
+    private WebElement acceptBtn;
 
     @FindBy(xpath = "//span[text() = 'Create account']//parent::div")
     private WebElement createAccountBtn;

@@ -114,26 +114,30 @@ public class TraderUtils {
     public void sendKeys(WebElement element, String text) {
 
         try { waitObj().until(elementToBeClickable(element)).sendKeys(text);}
-        catch (Exception exception) { exceptionClassNameAndMessage(exception); }
+
+        catch (Exception exception) { System.out.println(exceptionClassNameAndMessage(exception)); }
     }
 
     // click the element
     public void clickElement(WebElement element) {
 
         try { waitObj().until(elementToBeClickable(element)).click(); }
-        catch (Exception exception) { exceptionClassNameAndMessage(exception); }
+
+        catch (Exception exception) { System.out.println(exceptionClassNameAndMessage(exception)); }
     }
 
-    public void textShouldBePresent(WebElement element, String text){
+    public void textShouldBePresent(String xpath, String text){
 
-        try { waitObj().until(ExpectedConditions.textToBePresentInElement(element, text));} catch (Exception exception) {
-            exceptionClassNameAndMessage(exception);
-        }
+        try { waitObj().until(ExpectedConditions.textToBe(By.xpath(xpath), text)); }
+
+        catch (Exception exception) { System.out.println(exceptionClassNameAndMessage(exception)); exception.printStackTrace(); }
     }
 
     public void sleep(long time) {
 
-        try { Thread.sleep(time); } catch (Exception exception) { exceptionClassNameAndMessage(exception); }
+        try { Thread.sleep(time); }
+
+        catch (Exception exception) { System.out.println(exceptionClassNameAndMessage(exception)); }
     }
 
     static ObjectMapper mapper = new ObjectMapper();
@@ -165,7 +169,6 @@ public class TraderUtils {
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(System.getProperty("user.dir") + filePath), object);
         } catch (Exception ex) {
-
             System.out.println("problem on jsonPayloadWriter method");
         }
     }
@@ -353,6 +356,13 @@ public class TraderUtils {
     public void scrollToElement(WebElement element){
 
         javascriptExecutorObj().executeScript("arguments[0].scrollIntoView();", element);
+    }
+
+    public void javascriptClick(WebElement element){
+
+        javascriptExecutorObj().executeScript("arguments[0].click();", element);
+
+        //document.getElementById('gbqfb').click();"
     }
 
 

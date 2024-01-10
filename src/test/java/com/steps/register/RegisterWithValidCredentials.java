@@ -8,6 +8,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class RegisterWithValidCredentials extends TraderUtils {
 
@@ -46,6 +49,22 @@ public class RegisterWithValidCredentials extends TraderUtils {
     public void user_click_on_check_box_for_terms_and_conditions() {
 
         clickElement(po_manager.getRegisterPage().getCheckBox());
+
+        sleep(500);
+
+        List<WebElement> checkBoxes = po_manager.getRegisterPage().getCheckBoxes();
+
+        for (int i = 0; i < checkBoxes.size(); i++){
+
+            if (i == 1 || i == 2){
+
+                clickElement(checkBoxes.get(i));
+            }
+        }
+
+        scrollToElement(po_manager.getRegisterPage().getAcceptBtn());
+
+        clickElement(po_manager.getRegisterPage().getAcceptBtn());
     }
     @Then("at last user click the Create Account button")
     public void at_last_user_click_the_create_account_button() {
@@ -61,13 +80,13 @@ public class RegisterWithValidCredentials extends TraderUtils {
     @Then("toast message should display to the user {string}")
     public void toast_message_should_display_to_the_user(String message) {
 
-        textShouldBePresent(po_manager.getRegisterPage().getGetCode(), message);
+        textShouldBePresent("//div[text() = 'OTP sent successfully']", message);
     }
 
     @When("user should enter the email OTP")
     public void user_should_enter_the_email_otp() {
 
-        AdminOTP2.getMailAndMobileOTP(RegisterData.emailID, "");
+        AdminOTP2.getMailAndMobileOTP(RegisterData.emailID, "", "Register");
 
         sendKeys(po_manager.getRegisterPage().getOtpField(), AdminOTP2.emailOTP);
     }

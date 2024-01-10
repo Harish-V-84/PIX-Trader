@@ -1,9 +1,6 @@
 package com.trader.po_manager;
 
-import com.trader.po_models.AdminPage;
-import com.trader.po_models.KYC_VerificationPage;
-import com.trader.po_models.LoginPage;
-import com.trader.po_models.RegisterPage;
+import com.trader.po_models.*;
 import org.openqa.selenium.WebDriver;
 
 public class PageObjectManager {
@@ -13,6 +10,8 @@ public class PageObjectManager {
     private RegisterPage registerPage;
     private KYC_VerificationPage kycVerificationPage;
     private AdminPage adminPage;
+
+    private CRM_LoginPage crmLoginPage;
 
     public PageObjectManager(WebDriver driver2) {
 
@@ -35,10 +34,13 @@ public class PageObjectManager {
 
     }
 
-
     public AdminPage getAdminPage(){
 
         return adminPage == null ? new AdminPage(driver) : adminPage;
     }
 
+    public CRM_LoginPage getCrmPage() {
+
+        return crmLoginPage == null ? new CRM_LoginPage(driver) : crmLoginPage;
+    }
 }

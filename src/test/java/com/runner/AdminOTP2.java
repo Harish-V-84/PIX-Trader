@@ -9,12 +9,12 @@ public class AdminOTP2 extends TraderUtils {
     public static String emailOTP;
     public static String mobileOTP;
 
-    public static void getMailAndMobileOTP(String emailID, String mobileNum){
+    public static void getMailAndMobileOTP(String emailID, String mobileNum, String kycRegister){
 
-        new AdminOTP2().mailAndMobileOTP(emailID, mobileNum);
+        new AdminOTP2().mailAndMobileOTP(emailID, mobileNum, kycRegister);
     }
 
-    private void mailAndMobileOTP(String emailID, String mobileNum){
+    private void mailAndMobileOTP(String emailID, String mobileNum, String kycRegister){
 
         String TraderWin = getCurrentWindow();
 
@@ -24,21 +24,40 @@ public class AdminOTP2 extends TraderUtils {
 
         String adminWin = getCurrentWindow();
 
-        sendKeys(po_manager.getAdminPage().getEmailId(), "sunil@pibase.info");
+        if(!kycRegister.isEmpty()) {
 
-        sendKeys(po_manager.getAdminPage().getPassword(), "nullvoid@13");
+            sendKeys(po_manager.getAdminPage().getEmailId(), "sunil@pibase.info");
 
-        clickElement(po_manager.getAdminPage().getSubmitBtn());
+            sendKeys(po_manager.getAdminPage().getPassword(), "nullvoid@13");
+
+            clickElement(po_manager.getAdminPage().getSubmitBtn());
+        }
 
         clickElement(po_manager.getAdminPage().getNotificationPage());
 
         if (!emailID.isEmpty() && !mobileNum.isEmpty()) {
+
+            for (int i = 0; i < 10; i++){
+
+                if (po_manager.getAdminPage().emailsMore(emailID).size() != 2){
+
+                    sleep(1000);
+
+                    driver.navigate().refresh();
+
+                }else {
+
+                    break;
+                }
+            }
 
             clickElement(po_manager.getAdminPage().emailMore(emailID));
 
             clickElement(po_manager.getAdminPage().getViewBtn());
 
             emailOTP = getElementText(po_manager.getAdminPage().getOtpText());
+
+            navigateBack();
 
             sleep(500);
 

@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 @Getter
 public class AdminPage {
 
@@ -34,6 +36,12 @@ public class AdminPage {
     public WebElement emailMore(String email) {
 
         return driver.findElement(By.xpath("//table//child::tbody//following-sibling::td[text() = '"
+                + email + "']//parent::tr//child::td//child::div//child::button"));
+    }
+
+    public List<WebElement> emailsMore(String email) {
+
+        return driver.findElements(By.xpath("//table//child::tbody//following-sibling::td[text() = '"
                 + email + "']//parent::tr//child::td//child::div//child::button"));
     }
 

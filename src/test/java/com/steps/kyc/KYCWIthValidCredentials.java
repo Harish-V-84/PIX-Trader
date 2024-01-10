@@ -1,6 +1,8 @@
 package com.steps.kyc;
 
 import com.runner.AdminOTP;
+import com.runner.AdminOTP2;
+import com.runner.CRM_KYC;
 import com.trader.applicationData.KYC_VerificationData;
 import com.trader.applicationData.RegisterData;
 import com.trader.utils.TraderUtils;
@@ -18,6 +20,22 @@ public class KYCWIthValidCredentials extends TraderUtils {
 
         sendKeys(po_manager.getKycVerification().getEnterMobileNum(), valid.mobileNum);
     }
+
+    @Given("click the get code text for email OTP")
+    public void click_the_get_code_text_for_email_otp() {
+
+        clickElement(po_manager.getKycVerification().getClickEmailCode());
+
+    }
+
+    @Then("toast message for email OTP should display to the user {string}")
+    public void toastMessageForEmailOTPShouldDisplayToTheUser(String otpSent) {
+
+        textShouldBePresent("//div[text() = 'OTP sent successfully']", otpSent);
+
+        sleep(3000);
+    }
+
     @Given("click the get code text for mobile OTP")
     public void click_the_get_code_text_for_mobile_otp() {
 
@@ -27,35 +45,23 @@ public class KYCWIthValidCredentials extends TraderUtils {
     @Then("toast message for mobile OTP should display to the user {string}")
     public void toastMessageForMobileOTPShouldDisplayToTheUser(String otpSent) {
 
-        textShouldBePresent(po_manager.getKycVerification().getOtpSentMessage(), otpSent);
-    }
-
-    @Given("click the get code text for email OTP")
-    public void click_the_get_code_text_for_email_otp() {
-
-        clickElement(po_manager.getKycVerification().getClickEmailCode());
-    }
-
-    @Then("toast message for email OTP should display to the user {string}")
-    public void toastMessageForEmailOTPShouldDisplayToTheUser(String otpSent) {
-
-        textShouldBePresent(po_manager.getKycVerification().getOtpSentMessage(), otpSent);
+        textShouldBePresent("//div[text() = 'OTP sent successfully']", otpSent);
     }
 
     @Given("user enter the email OTP in input field")
     public void user_enter_the_email_otp_in_input_field() {
 
-//        sleep(5000);
+//        sleep(4000);
 
-        AdminOTP.getOTP(RegisterData.emailID, valid.mobileNum);
+        AdminOTP2.getMailAndMobileOTP(RegisterData.emailID, valid.mobileNum, "");
 
-        sendKeys(po_manager.getKycVerification().getEmailOTPInputField(), AdminOTP.emailOTP);
+        sendKeys(po_manager.getKycVerification().getEmailOTPInputField(), AdminOTP2.emailOTP);
 
     }
     @Given("enter the mobile OTP in input field")
     public void enter_the_mobile_otp_in_input_field() {
 
-        sendKeys(po_manager.getKycVerification().getMobileOTPInputField(), AdminOTP.mobileOTP);
+        sendKeys(po_manager.getKycVerification().getMobileOTPInputField(), AdminOTP2.mobileOTP);
     }
     @Given("user must click the verify mobile button")
     public void user_must_click_the_verify_mobile_button() {
@@ -64,6 +70,8 @@ public class KYCWIthValidCredentials extends TraderUtils {
     }
     @Then("validate the user navigated to {string} fields")
     public void validate_the_user_navigated_to_fields(String personalInformation) {
+
+//        textShouldBePresent("//h3[text() = 'Personal Information']", personalInformation);
 
         Assert.assertEquals(personalInformation, getElementText(po_manager.getKycVerification().getPersonalInformationText()));
     }
@@ -216,7 +224,7 @@ public class KYCWIthValidCredentials extends TraderUtils {
 
         uploadImage(filePaths().get("image"));
 
-        sleep(700);
+        sleep(2000);
     }
     @Then("click on Submit button present in the Documents field")
     public void click_on_submit_button_present_in_the_documents_field() {
@@ -237,7 +245,7 @@ public class KYCWIthValidCredentials extends TraderUtils {
 
         uploadImage(filePaths().get("image"));
 
-        sleep(700);
+        sleep(2000);
     }
     @Then("click the privacy policy checkbox")
     public void click_the_privacy_policy_checkbox() {
@@ -250,6 +258,10 @@ public class KYCWIthValidCredentials extends TraderUtils {
     public void click_on_submit_button_present_in_the_selfie_field() {
 
         clickElement(po_manager.getKycVerification().getSubmitBtn());
+
+//        System.out.println(RegisterData.emailID);
+
+        CRM_KYC.kycApprove(RegisterData.emailID);
     }
 
 
