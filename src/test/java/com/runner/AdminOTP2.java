@@ -3,18 +3,21 @@ package com.runner;
 import com.trader.applicationData.RegisterData;
 import com.trader.utils.TraderUtils;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class AdminOTP2 extends TraderUtils {
 
-    public static String emailOTP;
+    public static String emailOTP = "empty";
     public static String mobileOTP;
 
-    public static void getMailAndMobileOTP(String emailID, String mobileNum, String kycRegister){
+    public static void getMailAndMobileOTP(String emailID, String mobileNum, String login){
 
-        new AdminOTP2().mailAndMobileOTP(emailID, mobileNum, kycRegister);
+        new AdminOTP2().mailAndMobileOTP(emailID, mobileNum, login);
     }
 
-    private void mailAndMobileOTP(String emailID, String mobileNum, String kycRegister){
+    private void mailAndMobileOTP(String emailID, String mobileNum, String login){
 
         String TraderWin = getCurrentWindow();
 
@@ -24,7 +27,7 @@ public class AdminOTP2 extends TraderUtils {
 
         String adminWin = getCurrentWindow();
 
-        if(!kycRegister.isEmpty()) {
+        if(login.equalsIgnoreCase("Login")) {
 
             sendKeys(po_manager.getAdminPage().getEmailId(), "sunil@pibase.info");
 
@@ -37,7 +40,7 @@ public class AdminOTP2 extends TraderUtils {
 
         if (!emailID.isEmpty() && !mobileNum.isEmpty()) {
 
-            for (int i = 0; i < 10; i++){
+            while (true){
 
                 if (po_manager.getAdminPage().emailsMore(emailID).size() != 2){
 
@@ -55,7 +58,39 @@ public class AdminOTP2 extends TraderUtils {
 
             clickElement(po_manager.getAdminPage().getViewBtn());
 
-            emailOTP = getElementText(po_manager.getAdminPage().getOtpText());
+            List<WebElement> emailOtp = po_manager.getAdminPage().getOtpText();
+
+            for(WebElement otp: emailOtp){
+
+                if (getElementText(otp) != null) {
+
+                    emailOTP = getElementText(otp);
+
+                }else {
+
+                    emailOTP = null;
+                }
+
+                if (emailOTP == null){
+
+                    navigateBack();
+
+                    sleep(5000);
+
+                    driver.navigate().refresh();
+
+                    clickElement(po_manager.getAdminPage().emailMore(emailID));
+
+                    clickElement(po_manager.getAdminPage().getViewBtn());
+
+                    emailOTP = getElementText(otp);
+
+                    if (!emailOTP.isEmpty()){
+
+                        break;
+                    }
+                }
+            }
 
             navigateBack();
 
@@ -65,7 +100,7 @@ public class AdminOTP2 extends TraderUtils {
 
             clickElement(po_manager.getAdminPage().getViewBtn());
 
-            mobileOTP = getElementText(po_manager.getAdminPage().getOtpText());
+            mobileOTP = getElementText(po_manager.getAdminPage().getMobileOTPText());
 
         }else {
 
@@ -73,7 +108,39 @@ public class AdminOTP2 extends TraderUtils {
 
             clickElement(po_manager.getAdminPage().getViewBtn());
 
-            emailOTP = getElementText(po_manager.getAdminPage().getOtpText());
+            List<WebElement> emailOtp = po_manager.getAdminPage().getOtpText();
+
+            for(WebElement otp: emailOtp){
+
+                if (getElementText(otp) != null) {
+
+                    emailOTP = getElementText(otp);
+
+                }else {
+
+                    emailOTP = null;
+                }
+
+                if (emailOTP == null){
+
+                    navigateBack();
+
+                    sleep(5000);
+
+                    driver.navigate().refresh();
+
+                    clickElement(po_manager.getAdminPage().emailMore(emailID));
+
+                    clickElement(po_manager.getAdminPage().getViewBtn());
+
+                    emailOTP = getElementText(otp);
+
+                    if (!emailOTP.isEmpty()){
+
+                        break;
+                    }
+                }
+            }
 
         }
 

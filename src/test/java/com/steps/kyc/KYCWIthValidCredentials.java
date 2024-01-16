@@ -10,6 +10,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class KYCWIthValidCredentials extends TraderUtils {
 
@@ -71,7 +74,7 @@ public class KYCWIthValidCredentials extends TraderUtils {
     @Then("validate the user navigated to {string} fields")
     public void validate_the_user_navigated_to_fields(String personalInformation) {
 
-//        textShouldBePresent("//h3[text() = 'Personal Information']", personalInformation);
+        textShouldBePresent("//h3[text() = 'Personal Information']", personalInformation);
 
         Assert.assertEquals(personalInformation, getElementText(po_manager.getKycVerification().getPersonalInformationText()));
     }
@@ -262,6 +265,41 @@ public class KYCWIthValidCredentials extends TraderUtils {
 //        System.out.println(RegisterData.emailID);
 
         CRM_KYC.kycApprove(RegisterData.emailID);
+
+        googleAuth();
+    }
+
+    public void googleAuth(){
+
+        clickElement(po_manager.getTraderHomePage().getSecurity());
+
+        clickElement(po_manager.getSecurityPage().getGoogleAuthEnableBtn());
+
+        clickElement(po_manager.getSecurityPage().getGoogleAuthEmailGetCode());
+
+        List<WebElement> text = po_manager.getSecurityPage().getGoogleAuthCode();
+
+        String code = "";
+
+        for (int i = 0; i < text.size(); i++){
+
+            if (i == 2){
+
+                code = getElementText(text.get(i));
+            }
+        }
+
+        System.out.println("Google Auth QR code ==> " + code);
+
+        sleep(3000);
+
+        AdminOTP2.getMailAndMobileOTP(RegisterData.emailID, "", "");
+
+        sendKeys(po_manager.getSecurityPage().getGoogleAuthEmailOTPInput(), AdminOTP2.emailOTP);
+
+        sendKeys(po_manager.getSecurityPage().getGoogleAuthCodeInput(), getGoogleAuthCode(code));
+
+        clickElement(po_manager.getSecurityPage().getEnableGoogleAuthBtn());
     }
 
 

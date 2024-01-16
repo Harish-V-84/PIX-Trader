@@ -40,8 +40,9 @@ public class Hooks {
             System.out.println("scenario status :"+status);
         }
 
-        base.takeSnapShot(TraderUtils.driver, base.filePaths().get("Screenshots")+"/img"+imageCount+".png");
-        imageCount++;
+        /** This method will take screenshot for each step and saves the screenshot in the project dir **/
+//        base.takeSnapShot(TraderUtils.driver, base.filePaths().get("Screenshots")+"/img"+imageCount+".png");
+//        imageCount++;
 
     }
 

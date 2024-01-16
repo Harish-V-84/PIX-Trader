@@ -10,6 +10,8 @@ public class PageObjectManager {
     private RegisterPage registerPage;
     private KYC_VerificationPage kycVerificationPage;
     private AdminPage adminPage;
+    private TraderHomePage traderHomePage;
+    private SecurityPage securityPage;
 
     private CRM_LoginPage crmLoginPage;
 
@@ -42,5 +44,15 @@ public class PageObjectManager {
     public CRM_LoginPage getCrmPage() {
 
         return crmLoginPage == null ? new CRM_LoginPage(driver) : crmLoginPage;
+    }
+
+    public TraderHomePage getTraderHomePage(){
+
+        return traderHomePage == null ? new TraderHomePage(driver) : traderHomePage;
+    }
+
+    public SecurityPage getSecurityPage(){
+
+        return securityPage == null ? new SecurityPage(driver) : securityPage;
     }
 }

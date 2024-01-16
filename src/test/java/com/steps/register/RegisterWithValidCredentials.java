@@ -86,7 +86,7 @@ public class RegisterWithValidCredentials extends TraderUtils {
     @When("user should enter the email OTP")
     public void user_should_enter_the_email_otp() {
 
-        AdminOTP2.getMailAndMobileOTP(RegisterData.emailID, "", "Register");
+        AdminOTP2.getMailAndMobileOTP(RegisterData.emailID, "", "Login");
 
         sendKeys(po_manager.getRegisterPage().getOtpField(), AdminOTP2.emailOTP);
     }

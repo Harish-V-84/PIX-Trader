@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -54,8 +55,11 @@ public class AdminPage {
     @FindBy(xpath = "//div[text() = 'View']")
     private WebElement ViewBtn;
 
+    @FindAll
+    (
+            @FindBy(xpath = "//div[text() = 'Notification Payload']//parent::div//child::p")
+    )private List<WebElement> otpText;
+
     @FindBy(xpath = "//div[text() = 'Notification Payload']//parent::div//child::p")
-    private WebElement otpText;
-
-
+    private WebElement mobileOTPText;
 }

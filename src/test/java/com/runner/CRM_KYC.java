@@ -49,5 +49,11 @@ public class CRM_KYC extends TraderUtils {
             }
         }
 
+        sleep(500);
+
+        driver.close();
+
+        driverSwitch(TraderWin);
+
     }
 }

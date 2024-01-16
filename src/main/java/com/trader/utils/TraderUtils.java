@@ -3,6 +3,7 @@ package com.trader.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trader.po_manager.PageObjectManager;
 import org.apache.commons.io.FileUtils;
+import org.jboss.aerogear.security.otp.Totp;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -388,6 +389,15 @@ public class TraderUtils {
     public void newTab(String url){ javascriptExecutorObj().executeScript("window.open('"+url+"')"); }
 
     public void navigateBack(){ driver.navigate().back(); }
+
+    public String getGoogleAuthCode(String code){
+
+        Totp googleAuth = new Totp(code);
+
+        return googleAuth.now();
+    }
+
+
 
 
 
